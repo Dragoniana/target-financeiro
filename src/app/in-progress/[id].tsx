@@ -9,7 +9,7 @@ import { useTargets } from '@/contexts/TargetsContext'
 import { colors } from '@/theme'
 import { formatCurrency } from '@/utils/formatCurrency'
 
-import { styles } from './styles'
+import { styles } from '../../styles/in-Progress.styles'
 
 function formatDate(date: string) {
   return new Intl.DateTimeFormat('pt-BR', {

@@ -16,7 +16,7 @@ import { Input } from '@/components/Input'
 import { useTargets } from '@/contexts/TargetsContext'
 import { colors } from '@/theme'
 
-import { styles } from './target.styles'
+import { styles } from '../styles/target.styles'
 
 export default function Target() {
   const { id } = useLocalSearchParams<{ id?: string }>()

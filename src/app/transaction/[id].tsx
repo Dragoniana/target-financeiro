@@ -18,7 +18,7 @@ import { useTargets } from '@/contexts/TargetsContext'
 import { colors } from '@/theme'
 import { TransactionTypes } from '@/utils/TransactionTypes'
 
-import { styles } from './styles'
+import { styles } from '../../styles/transaction.styles'
 
 export default function Transaction() {
   const { id } = useLocalSearchParams<{ id: string }>()

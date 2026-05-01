@@ -7,7 +7,7 @@ import { TargetCard } from '@/components/TargetCard'
 import { useTargets } from '@/contexts/TargetsContext'
 import { formatCurrency } from '@/utils/formatCurrency'
 
-import { styles } from './styles'
+import { styles } from '../styles/home.styles'
 
 export default function Home() {
   const {
