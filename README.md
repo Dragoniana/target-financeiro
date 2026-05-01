@@ -49,12 +49,12 @@ Ao excluir uma meta, suas transações também são removidas.
 
 Caso seja necessário instalar manualmente as dependências usadas no projeto, execute:
 
-npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar
-npx expo install expo-font @expo-google-fonts/inter
-npx expo install expo-linear-gradient
-npx expo install @expo/vector-icons
-npx expo install @react-native-async-storage/async-storage
-npm install react-native-currency-input
+- npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar
+- npx expo install expo-font @expo-google-fonts/inter
+- npx expo install expo-linear-gradient
+- npx expo install @expo/vector-icons
+- npx expo install @react-native-async-storage/async-storage
+- npm install react-native-currency-input
 
 ## Estrutura do projeto
 
