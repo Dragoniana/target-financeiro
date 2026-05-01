@@ -22,6 +22,10 @@ export const styles = StyleSheet.create({
     paddingTop: 32,
   },
 
+  scrollContent: {
+    paddingBottom: 24,
+  },
+
   title: {
     color: colors.black,
     fontSize: 22,

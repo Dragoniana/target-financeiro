@@ -1,6 +1,6 @@
 import { MaterialIcons } from '@expo/vector-icons'
 import { router, useLocalSearchParams } from 'expo-router'
-import { Alert, Pressable, Text, View } from 'react-native'
+import { Alert, Pressable, ScrollView, Text, View } from 'react-native'
 
 import { Button } from '@/components/Button'
 import { Progress } from '@/components/Progress'
@@ -9,7 +9,7 @@ import { useTargets } from '@/contexts/TargetsContext'
 import { colors } from '@/theme'
 import { formatCurrency } from '@/utils/formatCurrency'
 
-import { styles } from '../../styles/in-Progress.styles'
+import { styles } from '@/styles/in-progress.styles'
 
 function formatDate(date: string) {
   return new Intl.DateTimeFormat('pt-BR', {
@@ -90,7 +90,11 @@ export default function InProgress() {
         </Pressable>
       </View>
 
-      <View style={styles.content}>
+      <ScrollView
+        style={styles.content}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContent}
+      >
         <Text style={styles.title}>{target.title}</Text>
 
         <View style={styles.progressInfo}>
@@ -132,7 +136,7 @@ export default function InProgress() {
             ))
           )}
         </View>
-      </View>
+      </ScrollView>
 
       <View style={styles.footer}>
         <Button

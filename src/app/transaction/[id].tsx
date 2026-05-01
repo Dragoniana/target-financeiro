@@ -16,14 +16,15 @@ import { Input } from '@/components/Input'
 import { TransactionType } from '@/components/TransactionType'
 import { useTargets } from '@/contexts/TargetsContext'
 import { colors } from '@/theme'
+import { formatCurrency } from '@/utils/formatCurrency'
 import { TransactionTypes } from '@/utils/TransactionTypes'
 
-import { styles } from '../../styles/transaction.styles'
+import { styles } from '@/styles/transaction.styles'
 
 export default function Transaction() {
   const { id } = useLocalSearchParams<{ id: string }>()
 
-  const { targets, createTransaction } = useTargets()
+  const { targets, createTransaction, getTargetBalance } = useTargets()
 
   const target = targets.find((item) => item.id === id)
 
@@ -39,6 +40,16 @@ export default function Transaction() {
 
     if (!value || value <= 0) {
       Alert.alert('Nova transação', 'Informe um valor maior que zero.')
+      return
+    }
+
+    const currentBalance = getTargetBalance(target.id)
+
+    if (type === TransactionTypes.Output && value > currentBalance) {
+      Alert.alert(
+        'Nova transação',
+        `Você só tem ${formatCurrency(currentBalance)} guardado nesta meta.`,
+      )
       return
     }
 
