@@ -32,20 +32,22 @@ O app permite criar metas, acompanhar o progresso de cada objetivo, registrar va
 - React Native Currency Input
 - Expo Vector Icons
 
-## Como executar o projeto
+## Armazenamento dos dados
 
-Clone o repositório:
+Os dados do aplicativo são salvos localmente no dispositivo usando AsyncStorage.
 
-```bash
-git clone https://github.com/SEU-USUARIO/target-financeiro.git
+Isso significa que as metas e transações permanecem salvas mesmo após fechar e abrir o app novamente no mesmo dispositivo.
 
-- cd target-financeiro
-- npm install
-- npx expo start --clear
+## Regras de negócio
+O saldo de uma meta é calculado pelas entradas menos as saídas.
+O progresso da meta é calculado com base no saldo atual e no valor alvo.
+A porcentagem de progresso não ultrapassa 100%.
+Não é permitido resgatar um valor maior do que o saldo disponível da meta.
+Ao excluir uma meta, suas transações também são removidas.
 
 ## Dependências principais
 
- Caso seja necessário instalar manualmente as dependências usadas no projeto, execute:
+Caso seja necessário instalar manualmente as dependências usadas no projeto, execute:
 
 npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar
 npx expo install expo-font @expo-google-fonts/inter
@@ -95,15 +97,17 @@ src/
     formatCurrency.ts
     TransactionTypes.ts
 
-## Armazenamento dos dados
 
-Os dados do aplicativo são salvos localmente no dispositivo usando AsyncStorage.
+## Como executar o projeto
 
-Isso significa que as metas e transações permanecem salvas mesmo após fechar e abrir o app novamente no mesmo dispositivo.
+Clone o repositório:
 
-## Regras de negócio
-O saldo de uma meta é calculado pelas entradas menos as saídas.
-O progresso da meta é calculado com base no saldo atual e no valor alvo.
-A porcentagem de progresso não ultrapassa 100%.
-Não é permitido resgatar um valor maior do que o saldo disponível da meta.
-Ao excluir uma meta, suas transações também são removidas.
+```bash
+git clone https://github.com/Dragoniana/target-financeiro.git
+
+- cd target-financeiro
+- npm install
+- npx expo start --clear
+
+
+
