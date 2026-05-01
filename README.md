@@ -56,7 +56,22 @@ Caso seja necessário instalar manualmente as dependências usadas no projeto, e
 - npx expo install @react-native-async-storage/async-storage
 - npm install react-native-currency-input
 
-## Estrutura do projeto
+
+
+
+## Como executar o projeto
+
+Clone o repositório:
+
+```bash
+git clone https://github.com/Dragoniana/target-financeiro.git
+
+- cd target-financeiro
+- npm install
+- npx expo start --clear
+
+
+ Estrutura do projeto
 
 src/
   app/
@@ -96,18 +111,3 @@ src/
   utils/
     formatCurrency.ts
     TransactionTypes.ts
-
-
-## Como executar o projeto
-
-Clone o repositório:
-
-```bash
-git clone https://github.com/Dragoniana/target-financeiro.git
-
-- cd target-financeiro
-- npm install
-- npx expo start --clear
-
-
-
