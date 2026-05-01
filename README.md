@@ -45,6 +45,16 @@ A porcentagem de progresso não ultrapassa 100%.
 Não é permitido resgatar um valor maior do que o saldo disponível da meta.
 Ao excluir uma meta, suas transações também são removidas.
 
+## Como executar o projeto
+
+Clone o repositório:
+
+ git clone https://github.com/Dragoniana/target-financeiro.git
+
+- cd target-financeiro
+- npm install
+- npx expo start --clear
+
 ## Dependências principais
 
 Caso seja necessário instalar manualmente as dependências usadas no projeto, execute:
@@ -57,22 +67,9 @@ Caso seja necessário instalar manualmente as dependências usadas no projeto, e
 - npm install react-native-currency-input
 
 
+ ## Estrutura do projeto
 
-
-## Como executar o projeto
-
-Clone o repositório:
-
-```bash
-git clone https://github.com/Dragoniana/target-financeiro.git
-
-- cd target-financeiro
-- npm install
-- npx expo start --clear
-
-
- Estrutura do projeto
-
+ ```txt
 src/
   app/
     _layout.tsx
