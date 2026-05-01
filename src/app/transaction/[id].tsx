@@ -45,6 +45,14 @@ export default function Transaction() {
 
     const currentBalance = getTargetBalance(target.id)
 
+    console.log({
+      tipoSelecionado: type,
+      valorDigitado: value,
+      saldoAtual: currentBalance,
+      metaId: target.id,
+      nomeMeta: target.title,
+    })
+
     if (type === TransactionTypes.Output && value > currentBalance) {
       Alert.alert(
         'Nova transação',
