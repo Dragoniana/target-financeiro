@@ -1,50 +1,109 @@
-# Welcome to your Expo app 👋
+# Target Financeiro
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Aplicativo mobile desenvolvido em React Native com Expo para gerenciamento de metas financeiras.
 
-## Get started
+O app permite criar metas, acompanhar o progresso de cada objetivo, registrar valores guardados e resgatados, além de visualizar um resumo geral com entradas, saídas e saldo disponível.
 
-1. Install dependencies
+## Funcionalidades
 
-   ```bash
-   npm install
-   ```
+- Cadastro de metas financeiras
+- Edição de metas cadastradas
+- Exclusão de metas
+- Listagem de metas na tela inicial
+- Visualização do progresso de cada meta
+- Cálculo automático da porcentagem de progresso
+- Cadastro de transações por meta
+- Registro de valores guardados
+- Registro de valores resgatados
+- Bloqueio de resgate maior que o saldo disponível da meta
+- Exclusão de transações
+- Resumo geral com total disponível, entradas e saídas
+- Persistência local dos dados com AsyncStorage
 
-2. Start the app
+## Tecnologias utilizadas
 
-   ```bash
-   npx expo start
-   ```
+- React Native
+- Expo
+- Expo Router
+- TypeScript
+- AsyncStorage
+- Expo Linear Gradient
+- Expo Google Fonts
+- React Native Currency Input
+- Expo Vector Icons
 
-In the output, you'll find options to open the app in a
+## Como executar o projeto
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+Clone o repositório:
 
 ```bash
-npm run reset-project
-```
+git clone https://github.com/SEU-USUARIO/target-financeiro.git
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+- cd target-financeiro
+- npm install
+- npx expo start --clear
 
-## Learn more
+## Dependências principais
 
-To learn more about developing your project with Expo, look at the following resources:
+ Caso seja necessário instalar manualmente as dependências usadas no projeto, execute:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar
+npx expo install expo-font @expo-google-fonts/inter
+npx expo install expo-linear-gradient
+npx expo install @expo/vector-icons
+npx expo install @react-native-async-storage/async-storage
+npm install react-native-currency-input
 
-## Join the community
+## Estrutura do projeto
 
-Join our community of developers creating universal apps.
+src/
+  app/
+    _layout.tsx
+    index.tsx
+    target.tsx
+    in-progress/
+      [id].tsx
+    transaction/
+      [id].tsx
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+  components/
+    Button/
+    CurrencyInput/
+    HomeHeader/
+    Input/
+    Loading/
+    Progress/
+    TargetCard/
+    TransactionCard/
+    TransactionType/
+
+  contexts/
+    TargetsContext.tsx
+
+  styles/
+    home.styles.ts
+    target.styles.ts
+    inProgress.styles.ts
+    transaction.styles.ts
+
+  theme/
+    colors.ts
+    fontFamily.ts
+    index.ts
+
+  utils/
+    formatCurrency.ts
+    TransactionTypes.ts
+
+## Armazenamento dos dados
+
+Os dados do aplicativo são salvos localmente no dispositivo usando AsyncStorage.
+
+Isso significa que as metas e transações permanecem salvas mesmo após fechar e abrir o app novamente no mesmo dispositivo.
+
+## Regras de negócio
+O saldo de uma meta é calculado pelas entradas menos as saídas.
+O progresso da meta é calculado com base no saldo atual e no valor alvo.
+A porcentagem de progresso não ultrapassa 100%.
+Não é permitido resgatar um valor maior do que o saldo disponível da meta.
+Ao excluir uma meta, suas transações também são removidas.
