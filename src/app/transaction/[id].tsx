@@ -34,7 +34,6 @@ export default function Transaction() {
 
   function handleSave() {
     if (!target) {
-      console.log('ERRO: meta não encontrada')
 
       Alert.alert('Nova transação', 'Meta não encontrada.')
 
@@ -42,7 +41,6 @@ export default function Transaction() {
     }
 
     if (!value || value <= 0) {
-      console.log('ERRO: valor inválido', value)
 
       Alert.alert('Nova transação', 'Informe um valor maior que zero.')
 
@@ -51,16 +49,8 @@ export default function Transaction() {
 
     const currentBalance = getTargetBalance(target.id)
 
-    console.log('DEBUG TRANSAÇÃO:', {
-      tipoSelecionado: type,
-      tipoOutput: TransactionTypes.Output,
-      valorDigitado: value,
-      saldoAtual: currentBalance,
-      deveBloquear: type === TransactionTypes.Output && value > currentBalance,
-    })
 
     if (type === TransactionTypes.Output && value > currentBalance) {
-      console.log('ENTROU NO BLOQUEIO DE RESGATE')
 
       Alert.alert(
         'Nova transação',
@@ -71,7 +61,6 @@ export default function Transaction() {
       return
     }
 
-    console.log('TRANSAÇÃO CRIADA')
 
     createTransaction(target.id, type, value, description.trim())
 
