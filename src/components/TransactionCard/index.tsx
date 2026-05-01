@@ -2,13 +2,12 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { Pressable, Text, View } from 'react-native'
 
 import { colors } from '@/theme'
+import { TransactionTypes } from '@/utils/TransactionTypes'
 
 import { styles } from './styles'
 
-export type TransactionType = 'input' | 'output'
-
 type Props = {
-  type: TransactionType
+  type: TransactionTypes
   value: string
   date: string
   description: string
@@ -22,7 +21,7 @@ export function TransactionCard({
   description,
   onRemove,
 }: Props) {
-  const isInput = type === 'input'
+  const isInput = type === TransactionTypes.Input
 
   return (
     <View style={styles.container}>

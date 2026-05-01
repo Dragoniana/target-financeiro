@@ -8,6 +8,7 @@ import {
 } from '@expo-google-fonts/inter'
 
 import { Loading } from '@/components/Loading'
+import { TargetsProvider } from '@/contexts/TargetsContext'
 import { colors } from '@/theme'
 
 export default function Layout() {
@@ -22,13 +23,15 @@ export default function Layout() {
   }
 
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-        contentStyle: {
-          backgroundColor: colors.white,
-        },
-      }}
-    />
+    <TargetsProvider>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          contentStyle: {
+            backgroundColor: colors.white,
+          },
+        }}
+      />
+    </TargetsProvider>
   )
 }

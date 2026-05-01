@@ -6,7 +6,13 @@ import { colors } from '@/theme'
 
 import { styles } from './styles'
 
-export function HomeHeader() {
+type Props = {
+  total: string
+  input: string
+  output: string
+}
+
+export function HomeHeader({ total, input, output }: Props) {
   return (
     <LinearGradient
       colors={[colors.blue[500], colors.blue[800]] as const}
@@ -14,7 +20,7 @@ export function HomeHeader() {
     >
       <Text style={styles.label}>Total que você possui</Text>
 
-      <Text style={styles.total}>R$ 2.680,00</Text>
+      <Text style={styles.total}>{total}</Text>
 
       <View style={styles.divider} />
 
@@ -25,7 +31,7 @@ export function HomeHeader() {
             <Text style={styles.summaryLabel}>Entradas</Text>
           </View>
 
-          <Text style={styles.summaryValue}>R$ 6.184,90</Text>
+          <Text style={styles.summaryValue}>{input}</Text>
         </View>
 
         <View>
@@ -34,7 +40,7 @@ export function HomeHeader() {
             <Text style={styles.summaryLabel}>Saídas</Text>
           </View>
 
-          <Text style={styles.summaryValue}>-R$ 883,65</Text>
+          <Text style={styles.summaryValue}>{output}</Text>
         </View>
       </View>
     </LinearGradient>

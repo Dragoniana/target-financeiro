@@ -1,6 +1,6 @@
 import { MaterialIcons } from '@expo/vector-icons'
 import { router, useLocalSearchParams } from 'expo-router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Alert,
   KeyboardAvoidingView,
@@ -13,38 +13,33 @@ import {
 import { Button } from '@/components/Button'
 import { CurrencyInput } from '@/components/CurrencyInput'
 import { Input } from '@/components/Input'
+import { useTargets } from '@/contexts/TargetsContext'
 import { colors } from '@/theme'
 
 import { styles } from './target.styles'
 
-const targets = {
-  '1': {
-    id: '1',
-    title: 'Apple Watch',
-    targetValue: 1790,
-  },
-  '2': {
-    id: '2',
-    title: 'Comprar uma cadeira ergonômica',
-    targetValue: 1200,
-  },
-  '3': {
-    id: '3',
-    title: 'Fazer uma viagem para o Rio de Janeiro',
-    targetValue: 3000,
-  },
-}
-
 export default function Target() {
   const { id } = useLocalSearchParams<{ id?: string }>()
 
-  const isEditing = !!id
-  const target = id ? targets[id as keyof typeof targets] : null
+  const {
+    targets,
+    createTarget,
+    updateTarget,
+    deleteTarget,
+  } = useTargets()
 
-  const [title, setTitle] = useState(target?.title ?? '')
-  const [targetValue, setTargetValue] = useState<number | null>(
-    target?.targetValue ?? 0,
-  )
+  const isEditing = !!id
+  const target = id ? targets.find((item) => item.id === id) : undefined
+
+  const [title, setTitle] = useState('')
+  const [targetValue, setTargetValue] = useState<number | null>(0)
+
+  useEffect(() => {
+    if (target) {
+      setTitle(target.title)
+      setTargetValue(target.targetAmount)
+    }
+  }, [target])
 
   function handleSave() {
     if (!title.trim()) {
@@ -57,19 +52,22 @@ export default function Target() {
       return
     }
 
-    Alert.alert(
-      'Meta',
-      isEditing ? 'Meta atualizada com sucesso.' : 'Meta criada com sucesso.',
-      [
-        {
-          text: 'OK',
-          onPress: () => router.back(),
-        },
-      ],
-    )
+    if (isEditing && target) {
+      updateTarget(target.id, title.trim(), targetValue)
+      router.back()
+      return
+    }
+
+    const newTarget = createTarget(title.trim(), targetValue)
+
+    router.replace(`/in-progress/${newTarget.id}`)
   }
 
   function handleDelete() {
+    if (!target) {
+      return
+    }
+
     Alert.alert(
       'Excluir meta',
       'Deseja realmente excluir esta meta?',
@@ -81,9 +79,28 @@ export default function Target() {
         {
           text: 'Excluir',
           style: 'destructive',
-          onPress: () => router.replace('/'),
+          onPress: () => {
+            deleteTarget(target.id)
+            router.replace('/')
+          },
         },
       ],
+    )
+  }
+
+  if (isEditing && !target) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Pressable onPress={() => router.back()} hitSlop={8}>
+            <MaterialIcons name="arrow-back" size={28} color={colors.black} />
+          </Pressable>
+        </View>
+
+        <View style={styles.content}>
+          <Text style={styles.title}>Meta não encontrada</Text>
+        </View>
+      </View>
     )
   }
 
@@ -131,7 +148,10 @@ export default function Target() {
       </View>
 
       <View style={styles.footer}>
-        <Button title={isEditing ? 'Salvar alterações' : 'Criar meta'} onPress={handleSave} />
+        <Button
+          title={isEditing ? 'Salvar alterações' : 'Criar meta'}
+          onPress={handleSave}
+        />
       </View>
     </KeyboardAvoidingView>
   )

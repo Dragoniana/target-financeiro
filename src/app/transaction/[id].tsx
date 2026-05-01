@@ -1,12 +1,20 @@
 import { MaterialIcons } from '@expo/vector-icons'
 import { router, useLocalSearchParams } from 'expo-router'
 import { useState } from 'react'
-import { Alert, KeyboardAvoidingView, Platform, Pressable, Text, View } from 'react-native'
+import {
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  Text,
+  View,
+} from 'react-native'
 
 import { Button } from '@/components/Button'
 import { CurrencyInput } from '@/components/CurrencyInput'
 import { Input } from '@/components/Input'
 import { TransactionType } from '@/components/TransactionType'
+import { useTargets } from '@/contexts/TargetsContext'
 import { colors } from '@/theme'
 import { TransactionTypes } from '@/utils/TransactionTypes'
 
@@ -15,26 +23,28 @@ import { styles } from './styles'
 export default function Transaction() {
   const { id } = useLocalSearchParams<{ id: string }>()
 
+  const { targets, createTransaction } = useTargets()
+
+  const target = targets.find((item) => item.id === id)
+
   const [type, setType] = useState(TransactionTypes.Input)
   const [value, setValue] = useState<number | null>(0)
   const [description, setDescription] = useState('')
 
   function handleSave() {
+    if (!target) {
+      Alert.alert('Nova transação', 'Meta não encontrada.')
+      return
+    }
+
     if (!value || value <= 0) {
       Alert.alert('Nova transação', 'Informe um valor maior que zero.')
       return
     }
 
-    Alert.alert(
-      'Nova transação',
-      `Transação salva na meta ${id}.`,
-      [
-        {
-          text: 'OK',
-          onPress: () => router.back(),
-        },
-      ],
-    )
+    createTransaction(target.id, type, value, description.trim())
+
+    router.back()
   }
 
   return (

@@ -76,6 +76,12 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
 
+  emptyText: {
+    color: colors.gray[500],
+    fontSize: 13,
+    fontFamily: fontFamily.regular,
+  },
+
   footer: {
     paddingHorizontal: 24,
     paddingBottom: 32,

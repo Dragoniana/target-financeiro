@@ -21,8 +21,11 @@ export const styles = StyleSheet.create({
     marginBottom: 8,
   },
 
-  list: {
-    width: '100%',
+  emptyText: {
+    color: colors.gray[500],
+    fontSize: 13,
+    fontFamily: fontFamily.regular,
+    marginTop: 12,
   },
 
   footer: {
